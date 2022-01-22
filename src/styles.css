@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* display */
+
+.display-flex{
+    display:flex;
+}
+
+/* Margins  */
+
+.m-left-5{
+    margin-left:5%;
+}
+
+.m-left-10{
+    margin-left:20%;
+}
+
+.m-top-1{
+    margin-top:1%;
+}

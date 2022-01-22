@@ -1,0 +1,15 @@
+
+<div id="sidenav">
+    <div class="display-flex" *ngFor="let link of listSidenav">
+        <a routerLink="{{link.link}}" routerLinkActive="active">
+            <div class="display-flex" style="margin-top:15%">
+                <div style="width:20%">
+                    <i class="{{link.icon}}"></i>
+                </div>
+                <div class="m-left-10" style="width:100%">
+                    {{link.name}}
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
