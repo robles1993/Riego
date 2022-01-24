@@ -22,8 +22,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-sidenav-container{
     border:1px solid red;
+    background-color: red !important;
     width:40%;
-    position:absolute;
-    top:0px;
+    position:absolute  !important;
+    top:0px !important;
+    right:0px !important;
+    height:100vh !important;
     float:right;
 }

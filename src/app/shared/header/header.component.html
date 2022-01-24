@@ -10,4 +10,8 @@
 </div>
 <mat-sidenav-container *ngIf="showDetails" id="sidenav-user" class="sidenav-container" mode="side" >
     <app-details></app-details>
-    </mat-sidenav-container>
+    <div style="display:flex">
+        <button (click)="showDetails=false">Cancelar</button>
+        <button (click)="showDetails=true">Guardar</button>
+    </div>
+</mat-sidenav-container>

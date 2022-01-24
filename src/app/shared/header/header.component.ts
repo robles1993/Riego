@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InfoTokenEnum } from 'src/app/enums/infoToken.enum';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,14 @@ import { InfoTokenEnum } from 'src/app/enums/infoToken.enum';
 })
 export class HeaderComponent implements OnInit {
   userName: string;
-  constructor() {
+  constructor(
+    private tokenService: TokenService
+  ) {
   }
 
   showDetails: boolean = false;
   ngOnInit(): void {
-    this.userName = sessionStorage.getItem(InfoTokenEnum.USERNAME_KEY)
+    this.userName = this.tokenService.getUserName()
   }
   showUserDetails(){
     this.showDetails =! this.showDetails;
