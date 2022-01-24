@@ -1,15 +1,20 @@
-
 <div id="sidenav">
-    <div class="display-flex" *ngFor="let link of listSidenav">
-        <a routerLink="{{link.link}}" routerLinkActive="active">
-            <div class="display-flex" style="margin-top:15%">
-                <div style="width:20%">
-                    <i class="{{link.icon}}"></i>
+    <select>
+        <option>Seleccionar dispositivo</option>
+    </select>
+    <div class="display-flex" style="padding:0px" *ngFor="let link of listSidenav">
+        <ng-container *ngIf="isAdmin && link.roles.includes('admin') || !isAdmin && link.roles.includes('user') ">
+            <a routerLink="{{link.link}}" (click)="link.link === '/close' && logout()" routerLinkActive="active">
+                <div class="display-flex" style="margin-top:15%;">
+                    <div style="width:20%">
+                        <i class="{{link.icon}}"></i>
+                    </div>
+                    <div style="padding-left:10px">
+                        {{link.name}}
+                    </div>
                 </div>
-                <div class="m-left-10" style="width:100%">
-                    {{link.name}}
-                </div>
-            </div>
-        </a>
+            </a>
+        </ng-container>
+
     </div>
 </div>

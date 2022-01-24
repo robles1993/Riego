@@ -1,9 +1,14 @@
-<app-header ></app-header>
-<div class="display-flex">
-  <div id="container-sidenav" style="width:150px">
-    <app-sidenav ></app-sidenav>
+<ng-container *ngIf="isLogged" >
+  <div id="container-header" style=" height:5rem;background:black">
+    <app-header ></app-header>
   </div>
-  <div style="width:100%">
-    <router-outlet></router-outlet>
+  <div class="display-flex">
+    <div id="container-sidenav" style="width:250px">
+      <app-sidenav ></app-sidenav>
+    </div>
+    <div style="width:100%">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
+</ng-container>
+

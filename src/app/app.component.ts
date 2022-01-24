@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './services/main.service';
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,15 @@ import { MainService } from './services/main.service';
 })
 export class AppComponent implements OnInit  {
   title = 'appRiego';
-
+  isLogged = false;
   constructor(
-    private mainService: MainService
+    private mainService: MainService,
+    private tokenService: TokenService
   ){}
 
   ngOnInit(): void {
-    this.mainService.detectToken();
+    this.mainService.detectTokenFromLogin();
+    this.isLogged = this.tokenService.isLogged();
   }
 
 }

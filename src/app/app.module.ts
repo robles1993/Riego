@@ -11,7 +11,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/httpAuthInterceptor';
 import { CookieService } from "ngx-cookie-service";
 import { IndexComponent } from './index/index.component';
-
+import { SettingsComponent } from './pages-administrative/settings/settings.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { DetailsComponent } from './pages/user/details/details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,12 +24,17 @@ import { IndexComponent } from './index/index.component';
     SidenavComponent,
     HeaderComponent,
     IndexComponent,
+    SettingsComponent,
+    SidebarComponent,
+    DetailsComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule
 
   ],
   providers: [

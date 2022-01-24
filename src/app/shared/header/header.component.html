@@ -1,3 +1,13 @@
-<div style="background:black; height:5rem;color:white;">
-    Header
+<div style="height:100%;width:100%;padding-top:1%; color:white;">
+    <div style="display:flex; ">
+        <div style="width:95%">
+            Header
+        </div>
+        <div style="cursor:pointer" (click)="showUserDetails()">
+            {{userName}}
+        </div>
+    </div>
 </div>
+<mat-sidenav-container *ngIf="showDetails" id="sidenav-user" class="sidenav-container" mode="side" >
+    <app-details></app-details>
+    </mat-sidenav-container>

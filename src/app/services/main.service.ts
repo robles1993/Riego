@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 import { JwtDTO } from '../models/jwts-dto.class';
 import { TokenService } from './token.service';
 
@@ -14,16 +15,19 @@ export class MainService {
     private cookieService: CookieService,
     private tokenService: TokenService) { }
 
-  detectToken() {
-    this.infoToken = new JwtDTO({
-      token: this.cookieService.get('token'),
-      userName:  this.cookieService.get('userName'),
-      authorities: this.cookieService.get('authorities'),
-    });
-    this.tokenService.setToken(this.infoToken);
-    this.tokenService.setUserName(this.infoToken);
-    this.tokenService.setAuthorities(this.infoToken);
-  console.log('detect Token', this.infoToken )
+  detectTokenFromLogin() {
+    if(this.cookieService.get('token')){
+      this.infoToken = new JwtDTO(this.cookieService.get('token'));
+      this.tokenService.setToken(this.infoToken);
+    }
+  }
+
+  test(user?:any): Observable<any> {
+    let test = {
+      nombre:"pp",
+      precio:10,
+    }
+    return this.http.post("http://localhost:8080/producto/create",test);
 
   }
 }
