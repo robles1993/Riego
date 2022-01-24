@@ -28,8 +28,8 @@ export class AuthInterceptor implements HttpInterceptor {
         const dto: JwtDTO = new JwtDTO(this.tokenService.getToken());
         console.log('DTO', this.tokenService.getToken())
         return this.authService.refresh(dto).pipe(concatMap((data: any) => {
-          console.log('refreshing....');
-          this.tokenService.setToken(data.token);
+          console.log('refreshing....', data);
+          this.tokenService.setToken(data);
           intReq = this.addToken(req, data.token);
           return next.handle(intReq);
         }));
