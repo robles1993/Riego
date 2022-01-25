@@ -1,0 +1,15 @@
+.messageError{
+    background:red;
+}
+
+.messageAlert{
+    background:orange;
+}
+
+.messageInfo{
+    background:blue;
+}
+
+.messageSuccess{
+    background:green;
+}

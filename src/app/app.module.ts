@@ -16,6 +16,11 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DetailsComponent } from './pages/user/details/details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { messagesReducer } from './state/recuders/messages.reducer';
+import { ROOT_REDUCERS } from './state/app.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +39,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ name: 'TEST' })
 
   ],
   providers: [

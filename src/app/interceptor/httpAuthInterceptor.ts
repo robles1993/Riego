@@ -5,11 +5,13 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { TokenService } from '../services/token.service';
+import { MessagesService } from '../services/messages.service';
 const AUTHORIZATION = 'Authorization';
 @Injectable() 
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private tokenService: TokenService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private messageService: MessagesService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.tokenService.isLogged()) {
       return next.handle(req);
@@ -24,14 +26,18 @@ export class AuthInterceptor implements HttpInterceptor {
     intReq = this.addToken(req, token);
 
     return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {
+    if(err.error?.mensaje){
+      this.messageService.setMessages('ERROR', err.error.mensaje)
+    }
       if (err.status === 401) {
         const dto: JwtDTO = new JwtDTO(this.tokenService.getToken());
         console.log('DTO', this.tokenService.getToken())
         return this.authService.refresh(dto).pipe(concatMap((data: any) => {
-          console.log('refreshing....', data);
           this.tokenService.setToken(data);
           intReq = this.addToken(req, data.token);
+          // this.messageService.setMessages('INFO', 'Refrescano el token...')
           return next.handle(intReq);
+
         }));
         // this.tokenService.logOut();
 
