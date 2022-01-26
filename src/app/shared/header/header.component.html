@@ -9,6 +9,10 @@
     </div>
 </div>
 <mat-sidenav-container *ngIf="showDetails" id="sidenav-user" class="sidenav-container" mode="side" >
+    <div class="col-md-12 p-3">
+        <h1 *ngIf="infoUser.nombreUsuario">{{infoUser?.nombreUsuario.toUpperCase()}}</h1>
+
+    </div>
     <app-user-details (cancelDetail)="showDetails = $event" [infoUser]="infoUser"></app-user-details>
 
 </mat-sidenav-container>
