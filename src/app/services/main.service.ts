@@ -23,11 +23,17 @@ export class MainService {
   }
 
   test(user?:any): Observable<any> {
-    let test = {
-      nombre:"pp",
-      precio:10,
-    }
-    return this.http.post("http://localhost:8080/producto/create",test);
+    // let test = {
+    //   nombre:"pp",
+    //   precio:10,
+    // }
+    // return this.http.post("http://localhost:8080/producto/create",test);
+
+    // return this.http.get("http://localhost:8080/user/detail/1");
+    return this.http.get("http://localhost:8080/user/detailname/admin");
 
   }
+
+
+
 }

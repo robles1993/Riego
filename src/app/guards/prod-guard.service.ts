@@ -18,7 +18,7 @@ export class ProdGuardService implements CanActivate{
     const expectedRol = route.data['expectedRol'];
     this.realRol = this.tokenService.isAdmin() ? 'admin' : 'user';
     if(!this.tokenService.isLogged() || expectedRol.indexOf(this.realRol) < 0){
-      this.router.navigate(['/']);
+      window.location.href = 'http://localhost:63498/'
       return false;
     }
     return true;

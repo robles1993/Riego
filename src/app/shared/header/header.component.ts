@@ -1,6 +1,9 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { InfoTokenEnum } from 'src/app/enums/infoToken.enum';
+import { UserModel } from 'src/app/models/userModel.class';
 import { TokenService } from 'src/app/services/token.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +12,10 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class HeaderComponent implements OnInit {
   userName: string;
+  infoUser:UserModel = new UserModel({}); // tipar
   constructor(
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userService:UserService
   ) {
   }
 
@@ -20,5 +25,13 @@ export class HeaderComponent implements OnInit {
   }
   showUserDetails(){
     this.showDetails =! this.showDetails;
+    this.getInfoUser();
   }
+
+  getInfoUser(){
+    this.userService.getUserInfo(this.userName).subscribe((info)=>{
+      this.infoUser = new UserModel (info);
+    });
+  }
+  
 }

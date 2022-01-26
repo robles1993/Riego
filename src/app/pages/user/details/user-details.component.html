@@ -1,0 +1,37 @@
+<div class="col-md-12 p-3">
+    <h1 *ngIf="infoUser.nombreUsuario">{{infoUser?.nombreUsuario.toUpperCase()}}</h1>
+
+    <mat-tab-group>
+        <mat-tab label="Detalles">
+            <div class=" pt-3">
+                <app-input-generic [inpuType]="'text'" [label]="'ID'" [id]="'id'" [inputModel]="infoUser.id">
+                </app-input-generic>
+
+                <app-input-generic [inpuType]="'text'" [label]="'Nombre'" [id]="'name'" [inputModel]="infoUser.nombre">
+                </app-input-generic>
+
+                <app-input-generic [inpuType]="'text'" [label]="'Nombre de usuario'" [id]="'nameUser'"
+                    [inputModel]="infoUser.nombreUsuario"></app-input-generic>
+
+                <app-input-generic [inpuType]="'email'" [label]="'Email'" [id]="'email'" [inputModel]="infoUser.email">
+                </app-input-generic>
+
+                <br>
+
+                <app-button-generic [nameButton]="'Cambiar contraseña'"></app-button-generic>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Permisos"> 
+           Permisos
+        </mat-tab>
+        <!-- <mat-tab label="Third"> Content 3 </mat-tab> -->
+    </mat-tab-group>
+
+
+
+</div>
+
+
+
+<app-buttons-sidebar (closeSide)="closeDetails($event)"></app-buttons-sidebar>
