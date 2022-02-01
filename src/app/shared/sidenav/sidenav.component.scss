@@ -5,6 +5,10 @@
     background:$background-primary;
     padding-left:10px;
     height: 90vh;
+    overflow: hidden;
+    border-right:1px solid $color-primary;
+    border-left:1px solid $color-primary;
+
 }
 
 .container-links{

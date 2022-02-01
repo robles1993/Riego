@@ -7,6 +7,9 @@
     position:absolute;
     top:20px;
     left:180px;
+    :hover {
+        color:$color-secondary
+    }
 }
 
 #container-header{

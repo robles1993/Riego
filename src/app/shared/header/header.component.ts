@@ -17,7 +17,9 @@ export class HeaderComponent implements OnInit {
     private userService:UserService
   ) {
   }
-
+  
+  showSetting: boolean = false;
+  showAlert: boolean = false;
   showDetails: boolean = false;
   ngOnInit(): void {
     this.userName = this.tokenService.getUserName()
@@ -31,6 +33,14 @@ export class HeaderComponent implements OnInit {
     this.userService.getUserInfo(this.userName).subscribe((info)=>{
       this.infoUser = new UserModel (info);
     });
+  }
+
+  showAlerts(){
+    this.showAlert =! this.showAlert;
+  }
+
+  showSettings(){
+    this.showSetting =! this.showSetting;
   }
   
 }

@@ -61,6 +61,9 @@ mat-sidenav-container {
     height: 100vh !important;
     float: right;
     color: $color-primary !important;
+    @media (min-width: 0px) and (max-width: 820px){
+        width:100%;
+    }
 }
 
 mat-sidenav-container mat-tab-header {

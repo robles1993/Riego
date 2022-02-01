@@ -27,6 +27,7 @@ import { InputComponent } from './components/html/input/input.component';
 import { SelectComponent } from './components/html/select/select.component';
 import { ButtonComponent } from './components/html/button/button.component';
 import { ButtonsComponent } from './shared/sidebar/components/buttons/buttons.component';
+import { AlertsSidenavComponent } from './pages/alerts/sidenav/alerts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ButtonsComponent } from './shared/sidebar/components/buttons/buttons.co
     SelectComponent,
     ButtonComponent,
     ButtonsComponent,
+    AlertsSidenavComponent,
 
   ],
   imports: [
