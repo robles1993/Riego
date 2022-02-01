@@ -1,9 +1,12 @@
-<ng-container *ngIf="isLogged" >
+<ng-container *ngIf="isLogged">
   <div id="container-header">
-    <app-header ></app-header>
+    <app-header></app-header>
   </div>
   <div class="display-flex">
-    <div id="container-sidenav">
+    <div id="menu-toggle" class="cursor-pointer" (click)="hiddenSidenav()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div [ngStyle]="{width:sidenavWidth}" id="container-sidenav">
       <app-sidenav ></app-sidenav>
     </div>
     <div style="width:100%">
@@ -12,10 +15,9 @@
   </div>
 </ng-container>
 
-<ng-container  *ngFor="let message of messages$ | async">
-  <div class="alerts" 
-  [ngStyle]="message.type==='ERROR' && {'background': 'red'} "
-  [ngClass]="{'messageError': message.type ==='ERROR', 'messageSuccess':  message.type ==='SUCCESS', 'messageAlert': message.type ==='ALERT', 'messageInfo': message.type ==='INFO'}">
+<ng-container *ngFor="let message of messages$ | async">
+  <div class="alerts" [ngStyle]="message.type==='ERROR' && {'background': 'red'} "
+    [ngClass]="{'messageError': message.type ==='ERROR', 'messageSuccess':  message.type ==='SUCCESS', 'messageAlert': message.type ==='ALERT', 'messageInfo': message.type ==='INFO'}">
     {{message.value}}
   </div>
 </ng-container>

@@ -18,7 +18,7 @@ export class AppComponent implements OnInit  {
   isLogged = false;
   loading$: Observable<boolean> = new Observable();
   messages$: Observable<any> = new Observable();
-
+  sidenavWidth:string = "250px"
   _messages:any = {
     type:null,
     value:null,
@@ -45,5 +45,12 @@ export class AppComponent implements OnInit  {
     //   this._messages.value = response.value;
 
     // })
+  }
+  hiddenSidenav(){
+    if(this.sidenavWidth==="0px"){
+      this.sidenavWidth = "250px"
+    }else{
+      this.sidenavWidth = "0px"
+    }
   }
 }
