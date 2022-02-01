@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-buttons-sidebar',
   templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.css']
+  styleUrls: ['./buttons.component.scss']
 })
 export class ButtonsComponent implements OnInit {
 

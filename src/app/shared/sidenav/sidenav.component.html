@@ -2,14 +2,14 @@
     <select>
         <option>Seleccionar dispositivo</option>
     </select>
-    <div class="display-flex" style="padding:0px" *ngFor="let link of listSidenav">
+    <div class="container-links" *ngFor="let link of listSidenav">
         <ng-container *ngIf="isAdmin && link.roles.includes('admin') || !isAdmin && link.roles.includes('user') ">
             <a routerLink="{{link.link}}" (click)="link.link === '/close' && logout()" routerLinkActive="active">
-                <div class="display-flex" style="margin-top:15%;">
-                    <div style="width:20%">
+                <div class="container-link">
+                    <div class="container-icon">
                         <i class="{{link.icon}}"></i>
                     </div>
-                    <div style="padding-left:10px">
+                    <div class="container-name">
                         {{link.name}}
                     </div>
                 </div>

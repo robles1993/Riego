@@ -1,0 +1,24 @@
+
+@import '../../../styles/_globalVariables';
+
+#sidenav{
+    background:$background-primary;
+    padding-left:10px;
+    height: 90vh;
+}
+
+.container-links{
+    padding:0px;
+    display:flex;
+}
+
+.container-link{
+    margin-top:15%;
+    display:flex;
+}
+.container-icon{
+    width:20%
+}
+.container-name{
+    padding-left:10px
+}

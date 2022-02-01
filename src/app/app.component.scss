@@ -1,0 +1,34 @@
+@import '../styles/_globalVariables';
+
+#container-header{
+    height:5rem;
+    background:$color-dark;
+}
+
+#container-sidenav{
+    width:250px
+}
+/* Alerts */
+
+.alerts{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    padding:10px;
+}
+
+.messageError{
+    background:$alert-error;
+}
+
+.messageAlert{
+    background:$alert-warning;
+}
+
+.messageInfo{
+    background:$alert-info;
+}
+
+.messageSuccess{
+    background:$alert-success;
+}

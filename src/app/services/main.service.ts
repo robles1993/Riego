@@ -30,7 +30,7 @@ export class MainService {
     // return this.http.post("http://localhost:8080/producto/create",test);
 
     // return this.http.get("http://localhost:8080/user/detail/1");
-    return this.http.get("http://localhost:8080/user/detailname/admin");
+    return this.http.get("http://localhost:8888/device/detail/1");
 
   }
 
