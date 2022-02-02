@@ -2,17 +2,14 @@
 
 #container-header{
     height:100%;
-    width:100%;
-    padding-top:1%; 
-    color:$color-primary;
-    border-top:1px solid $color-primary;
-    border-bottom:1px solid $color-primary;
+
 
     #container-settings{
         background-color: $background-secondary;
     }
     #container-logo{
         width:50%;
+        padding-left:10px;
     }
 
     #container-icons{

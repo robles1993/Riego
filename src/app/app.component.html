@@ -6,10 +6,12 @@
     <div id="menu-toggle" class="cursor-pointer" (click)="hiddenSidenav()">
       <i class="fas fa-bars"></i>
     </div>
-    <div [ngStyle]="{width:sidenavWidth}" id="container-sidenav">
+    <div 
+    [ngStyle]="{width:sidenavWidth, background:sidenavWidth==='0px'?'transparent':'', padding:sidenavWidth==='0px'?'0px':'', borderColor:sidenavWidth==='0px'?'transparent':''}"
+    id="container-sidenav">
       <app-sidenav ></app-sidenav>
     </div>
-    <div style="width:100%">
+    <div id="container-bodys">
       <router-outlet></router-outlet>
     </div>
   </div>

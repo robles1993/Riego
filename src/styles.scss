@@ -40,7 +40,8 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: $background-primary;
+    background-color: $background-primary !important;
+    color:$color-primary !important;
 }
 
 // Cursor pointer;
