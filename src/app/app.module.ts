@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GraphicsComponent } from './pages/graphics/graphics.component';
@@ -28,6 +27,8 @@ import { SelectComponent } from './components/html/select/select.component';
 import { ButtonComponent } from './components/html/button/button.component';
 import { ButtonsComponent } from './shared/sidebar/components/buttons/buttons.component';
 import { AlertsSidenavComponent } from './pages/alerts/sidenav/alerts.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DatatableComponent } from './shared/datatable/datatable/datatable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { AlertsSidenavComponent } from './pages/alerts/sidenav/alerts.component'
     ButtonComponent,
     ButtonsComponent,
     AlertsSidenavComponent,
-
+    DatatableComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,8 @@ import { AlertsSidenavComponent } from './pages/alerts/sidenav/alerts.component'
     MatSidenavModule,
     MatTabsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
-    StoreDevtoolsModule.instrument({ name: 'TEST' })
+    StoreDevtoolsModule.instrument({ name: 'TEST' }),
+    NgxDatatableModule
 
   ],
   providers: [
