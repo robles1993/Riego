@@ -1,0 +1,8 @@
+::ng-deep ngx-datatable {
+    height:700px !important;
+    datatable-body-cell {
+        // border:1px solid red !important;
+        z-index: 999 !important;
+        overflow: visible !important;
+    }
+}

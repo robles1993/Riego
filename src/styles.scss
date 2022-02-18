@@ -1,4 +1,7 @@
 @import "./styles/_globalVariables";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
 
 /* colors */
 .color-primary {
@@ -40,8 +43,8 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: $background-primary !important;
-    color:$color-primary !important;
+    // background-color: $background-primary !important;
+    // color:$color-primary !important;
 }
 
 // Cursor pointer;
