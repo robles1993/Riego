@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { JwtDTO } from '../models/jwts-dto.class';
+import { DatatableService } from './datatable.service';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class MainService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    private datatableService:DatatableService) { }
 
   detectTokenFromLogin() {
     if(this.cookieService.get('token')){
@@ -22,7 +24,7 @@ export class MainService {
     }
   }
 
-  test(user?:any): Observable<any> {
+  test(page:any): Observable<any> {
     // let test = {
     //   nombre:"pp",
     //   precio:10,
@@ -30,8 +32,10 @@ export class MainService {
     // return this.http.post("http://localhost:8080/producto/create",test);
 
     // return this.http.get("http://localhost:8080/user/detail/1");
-    return this.http.get("http://localhost:8888/device/detail/1");
 
+    // return this.http.get("http://localhost:8888/device/detail/1");  //microservicio externo
+
+    return this.http.get("http://localhost:8080/producto/pages?page=" +  this.datatableService.formatPage(page)); //paginacion
   }
 
 
