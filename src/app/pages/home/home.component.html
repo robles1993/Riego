@@ -1,5 +1,14 @@
 Home component
 
 
-<button (click)="test()">product test</button><br><br>
-<app-datatable></app-datatable>
+<button (click)="datatableInfo()">product test</button><br><br>
+<!-- {{list | json}} -->
+<app-datatable 
+[rows]=" list"
+[columns]="columns" 
+[totalCount]="totalCount" 
+[totalPages]="totalPages" 
+[elementsVisibles]="elementsVisibles"
+[numberPage]="numberPage"
+(changePageEmit)="changePage($event)">
+</app-datatable>
