@@ -21,7 +21,11 @@ export class DatatableComponent implements OnInit {
   };
   @Input() set totalPages(val: number) {
     for (let i = 1; i <= val; i++) {
-      this.arrayTotalPages.push(i);
+      if(i===1){
+        this.arrayTotalPages.push({active:true, page:i});
+      }else{
+        this.arrayTotalPages.push({active:false, page:i});
+      }
     }
   }
   @Output() changePageEmit: EventEmitter<any> = new EventEmitter();
@@ -30,7 +34,9 @@ export class DatatableComponent implements OnInit {
   timeout: any;
   _elementsVisibles: number = 0;
   _numberPage: number = 0;
+  _genericSearch:string = null;
   expanded: any = {};
+  pageChange:any;
   constructor(
     private datatableService: DatatableService,
   ) {
@@ -56,57 +62,83 @@ export class DatatableComponent implements OnInit {
     alert('eeeee');
   }
 
+  clearActivePage(){
+    this.arrayTotalPages.forEach((element:any, index:any) => {
+      element.active = false;
+    });
+  }
+
   changePage(page: number) {
-    let pageChange = {
+    this.clearActivePage();
+    let notEnter:boolean = false;
+    this.pageChange = {
       number: page,
       format: true,
     }
-    console.log('actualpage', this._numberPage + 1);
-    console.log(' pagina a cambiar', pageChange.number);
-
-    if(this._numberPage + 1  != pageChange.number){
-      this.changePageEmit.emit(pageChange)
-    }
+    if(this._numberPage + 1  != this.pageChange.number){
+        this.changePageEmit.emit(this.pageChange);
+        this.arrayTotalPages.forEach((element:any, index:any) => {
+          if(element.page === this.pageChange.number){
+              this.arrayTotalPages[this.pageChange.number].active =true;
+              notEnter = true;
+          }
+        });
+      }
+      if(this.pageChange.number === 0 && !notEnter) this.arrayTotalPages[0].active =true;
   }
 
   firstPage() {
+    this.clearActivePage();
     let pageChange = {
       number: 0,
       format: true,
     }
     if(this._numberPage > 0){
-      this.changePageEmit.emit(pageChange)
+      this.changePageEmit.emit(pageChange);
+      this.arrayTotalPages[0].active =true;
     }
   }
 
   lastPage() {
+    this.clearActivePage();
     let pageChange = {
-      number: this.arrayTotalPages.slice(-1)[0],
+      number: this.arrayTotalPages.slice(-1)[0].page,
       format: true,
     }
     if(this._numberPage < pageChange.number -1){
-      this.changePageEmit.emit(pageChange)
+      this.changePageEmit.emit(pageChange);
+      this.arrayTotalPages.slice(-1)[0].active =true;
     }
   }
 
   nextPage() {
+    this.clearActivePage();
     let pageChange = {
-      number: this._numberPage + 1 === this.arrayTotalPages.slice(-1)[0] ? this._numberPage : this._numberPage + 1,
+      number: this._numberPage + 1 === this.arrayTotalPages.slice(-1)[0].page ? this._numberPage : this._numberPage + 1,
       format: false,
     }
     if(this._numberPage < pageChange.number){
       this.changePageEmit.emit(pageChange)
     }
-    
+    this.arrayTotalPages[pageChange.number].active =true;
   }
 
   backPage() {
+    this.clearActivePage();
     let pageChange = {
-      number: this._numberPage - 1 === this.arrayTotalPages.slice(-1)[0] ? this._numberPage : this._numberPage - 1,
+      number: this._numberPage - 1 === this.arrayTotalPages.slice(-1)[0].page ? this._numberPage : this._numberPage - 1,
       format: false,
     }
     pageChange.number < 0 ?null:this.changePageEmit.emit(pageChange);
+    this.arrayTotalPages[pageChange.number].active =true;
+
   }
+
+  
+  search(key:any){
+    console.log('KEY', key);
+  }
+
 
   onDetailToggle(event: any) {
 

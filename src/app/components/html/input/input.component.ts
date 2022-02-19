@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-generic',
@@ -8,14 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class InputComponent implements OnInit {
   @Input() inpuType:any ="text";
   @Input() inputModel:any = null;
+  @Input() showLabel:boolean = true;
   @Input() label:any = null;
   @Input() id:any = null;
-
-
+  @Output() emitKey: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  keyUp(key:any){
+    this.emitKey.emit(key.target.value);
+  }
 }
