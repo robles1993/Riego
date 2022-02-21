@@ -13,6 +13,7 @@ export class DatatableComponent implements OnInit {
   @Input() rows: [] = [];
   @Input() columns: any = [];
   @Input() totalCount: number = 0;
+  @Input() nameButtonNewData:String = ""
   @Input() set numberPage(val: number) {
     this._numberPage = val;
   };
@@ -29,6 +30,8 @@ export class DatatableComponent implements OnInit {
     }
   }
   @Output() changePageEmit: EventEmitter<any> = new EventEmitter();
+  @Output() genericSearchEmit: EventEmitter<any> = new EventEmitter();
+
   arrayTotalPages: any = [];
   ColumnMode = ColumnMode
   timeout: any;
@@ -37,6 +40,7 @@ export class DatatableComponent implements OnInit {
   _genericSearch:string = null;
   expanded: any = {};
   pageChange:any;
+
   constructor(
     private datatableService: DatatableService,
   ) {
@@ -137,6 +141,8 @@ export class DatatableComponent implements OnInit {
   
   search(key:any){
     console.log('KEY', key);
+
+    this.genericSearchEmit.emit(key);
   }
 
 

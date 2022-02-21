@@ -25,19 +25,11 @@ export class MainService {
   }
 
   test(page:any): Observable<any> {
-    // let test = {
-    //   nombre:"pp",
-    //   precio:10,
-    // }
-    // return this.http.post("http://localhost:8080/producto/create",test);
-
-    // return this.http.get("http://localhost:8080/user/detail/1");
-
-    // return this.http.get("http://localhost:8888/device/detail/1");  //microservicio externo
-
     return this.http.get("http://localhost:8080/producto/pages?page=" +  this.datatableService.formatPage(page)); //paginacion
   }
 
-
+  genericSearch(search:string): Observable<any> {
+    return this.http.get("http://localhost:8080/producto/search?filtro=" + search ); //paginacion
+  }
 
 }

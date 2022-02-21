@@ -70,4 +70,14 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  genericSearch(key:string){
+    this.mainService.genericSearch(key).subscribe({
+      next: (response) => {
+        this.list = this.formatList(response.content);
+        },
+        error: error => {
+        }
+    })
+  }
 }
