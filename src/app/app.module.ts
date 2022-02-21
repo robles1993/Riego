@@ -29,6 +29,7 @@ import { ButtonsComponent } from './shared/sidebar/components/buttons/buttons.co
 import { AlertsSidenavComponent } from './pages/alerts/sidenav/alerts.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DatatableComponent } from './shared/datatable/datatable/datatable.component';
+import { FooterComponent } from './shared/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { DatatableComponent } from './shared/datatable/datatable/datatable.compo
     ButtonsComponent,
     AlertsSidenavComponent,
     DatatableComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
