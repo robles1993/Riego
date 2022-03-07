@@ -24,12 +24,12 @@ export class MainService {
     }
   }
 
-  test(page:any): Observable<any> {
-    return this.http.get("http://localhost:8080/producto/pages?page=" +  this.datatableService.formatPage(page)); //paginacion
+  test(page:number = 0): Observable<any> {
+    return this.http.get("http://localhost:8080/producto/pages?page=" +  page); //paginacion
   }
 
   genericSearch(search:string): Observable<any> {
-    return this.http.get("http://localhost:8080/producto/search?filtro=" + search ); //paginacion
+    return this.http.get("http://localhost:8080/producto/search?filtro=" + search + '&' + "page=0" ); //paginacion
   }
 
 }

@@ -76,11 +76,11 @@
     <div style="width:80%;text-align:right">
       <i class="fas fa-chevron-circle-left" (click)="firstPage()"></i>
       <i  style="padding-left:10px; padding-right:10px; " class="fas fa-angle-left" (click)="backPage()"></i>
-      <ng-container *ngFor="let page of arrayTotalPages; let i = index">
+      <ng-container *ngFor="let page of arrayParcialPages; let i = index">
         <span style="cursor:pointer; margin-left:0.8%;font-size:15px" [ngClass]="{'active-page': page.active }"  (click)="changePage(page.page)">
            <strong>{{page.page}}</strong> <ng-container *ngIf="this.arrayTotalPages.slice(-1)[0]"> ,</ng-container>
         </span>
-      </ng-container>
+      </ng-container> <span *ngIf="this._numberPage  != arrayTotalPages.length ">...</span>
       <i style="padding-right:10px; padding-left:10px; " class="fas fa-angle-right" (click)="nextPage()"></i>
       <i class="fas fa-chevron-circle-right"  (click)="lastPage()"></i>
     </div>

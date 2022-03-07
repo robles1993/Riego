@@ -15,12 +15,13 @@ export class DatatableComponent implements OnInit {
   @Input() totalCount: number = 0;
   @Input() nameButtonNewData:String = ""
   @Input() set numberPage(val: number) {
-    this._numberPage = val;
+    this._numberPage = val + 1;
   };
   @Input() set elementsVisibles(val: number) {
     this._elementsVisibles = val;
   };
   @Input() set totalPages(val: number) {
+    this.arrayTotalPages = [];
     for (let i = 1; i <= val; i++) {
       if(i===1){
         this.arrayTotalPages.push({active:true, page:i});
@@ -28,11 +29,13 @@ export class DatatableComponent implements OnInit {
         this.arrayTotalPages.push({active:false, page:i});
       }
     }
+    this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
   }
   @Output() changePageEmit: EventEmitter<any> = new EventEmitter();
   @Output() genericSearchEmit: EventEmitter<any> = new EventEmitter();
-
   arrayTotalPages: any = [];
+  arrayParcialPages: any = [];
+
   ColumnMode = ColumnMode
   timeout: any;
   _elementsVisibles: number = 0;
@@ -40,6 +43,8 @@ export class DatatableComponent implements OnInit {
   _genericSearch:string = null;
   expanded: any = {};
   pageChange:any;
+  showPageInitial:number = 0;
+  showPageLast:number = 6;
 
   constructor(
     private datatableService: DatatableService,
@@ -66,88 +71,98 @@ export class DatatableComponent implements OnInit {
     alert('eeeee');
   }
 
+  activePageForChangePage(changePage:any){
+    this.arrayTotalPages.forEach((element:any) => {
+      if(element.page === changePage){
+          this.arrayTotalPages[changePage - 1].active =true;
+      }
+    });
+  }
+
   clearActivePage(){
-    this.arrayTotalPages.forEach((element:any, index:any) => {
+    this.arrayTotalPages.forEach((element:any) => {
       element.active = false;
     });
   }
 
-  changePage(page: number) {
-    this.clearActivePage();
-    let notEnter:boolean = false;
-    this.pageChange = {
-      number: page,
-      format: true,
+
+
+  setRangeShowArray(initial:any, last:number){
+    this.showPageInitial = initial.condition==="sum"? this.showPageInitial +  initial.value: 
+    initial.condition==="subtraction"?this.showPageInitial -  initial.value:initial.value;
+    this.showPageLast =this.showPageInitial + last; 
+    this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+  }
+
+  changeBlockPages(changePage:number ){
+    // debugger;
+    let lastElement = this.arrayParcialPages[this.arrayParcialPages.length - 1];
+    let firstElement = this.arrayParcialPages[0];
+    if(changePage === lastElement.page && changePage != this.arrayTotalPages[this.arrayTotalPages.length - 1].page){
+      this.setRangeShowArray({condition:"sum", value:5 },6);
     }
-    if(this._numberPage + 1  != this.pageChange.number){
-        this.changePageEmit.emit(this.pageChange);
-        this.arrayTotalPages.forEach((element:any, index:any) => {
-          if(element.page === this.pageChange.number){
-              this.arrayTotalPages[this.pageChange.number].active =true;
-              notEnter = true;
-          }
-        });
-      }
-      if(this.pageChange.number === 0 && !notEnter) this.arrayTotalPages[0].active =true;
+    if(changePage === firstElement.page && changePage != this.arrayTotalPages[0].page  ){
+      this.setRangeShowArray({condition:"subtraction", value:5 },6);
+    }
+  }
+
+  changePage(changePage: number) {
+    if(changePage != this._numberPage){
+      this.clearActivePage();
+      this.changeBlockPages(changePage);
+      this.changePageEmit.emit(changePage - 1);
+      this.activePageForChangePage(changePage);
+    }
   }
 
   firstPage() {
-    this.clearActivePage();
-    let pageChange = {
-      number: 0,
-      format: true,
-    }
-    if(this._numberPage > 0){
-      this.changePageEmit.emit(pageChange);
+    if(this._numberPage -1 > 0){
+      this.clearActivePage();
+      this.changePageEmit.emit(0);
+      this.setRangeShowArray({condition:"nothing", value:0 },6);
       this.arrayTotalPages[0].active =true;
     }
   }
 
   lastPage() {
-    this.clearActivePage();
-    let pageChange = {
-      number: this.arrayTotalPages.slice(-1)[0].page,
-      format: true,
-    }
-    if(this._numberPage < pageChange.number -1){
-      this.changePageEmit.emit(pageChange);
+    let lastLength =  this.arrayTotalPages.slice(-1)[0].page;
+    if(this._numberPage < lastLength - 1){
+      this.clearActivePage();
+      this.changePageEmit.emit(lastLength -1 );
+      this.showPageInitial =this.arrayTotalPages[this.arrayTotalPages.length - 1].page -5 ;
+      this.showPageLast =this.arrayTotalPages[this.arrayTotalPages.length - 1].page; 
+      this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
       this.arrayTotalPages.slice(-1)[0].active =true;
     }
   }
 
   nextPage() {
-    this.clearActivePage();
-    let pageChange = {
-      number: this._numberPage + 1 === this.arrayTotalPages.slice(-1)[0].page ? this._numberPage : this._numberPage + 1,
-      format: false,
+    if(this._numberPage < this.arrayTotalPages.length){
+      this.clearActivePage();
+      this.changeBlockPages(this._numberPage + 1);
+      this.changePageEmit.emit(this._numberPage);
+      this.arrayTotalPages[this._numberPage].active =true;
     }
-    if(this._numberPage < pageChange.number){
-      this.changePageEmit.emit(pageChange)
-    }
-    this.arrayTotalPages[pageChange.number].active =true;
+   
   }
 
   backPage() {
-    this.clearActivePage();
-    let pageChange = {
-      number: this._numberPage - 1 === this.arrayTotalPages.slice(-1)[0].page ? this._numberPage : this._numberPage - 1,
-      format: false,
+    let backPage = this._numberPage -1 ;
+    if(backPage > 0){
+      this.clearActivePage();
+      this.changeBlockPages(this._numberPage);
+      this.changePageEmit.emit(backPage-1);
+      this.arrayTotalPages[backPage - 1].active =true;
     }
-    pageChange.number < 0 ?null:this.changePageEmit.emit(pageChange);
-    this.arrayTotalPages[pageChange.number].active =true;
-
   }
 
   
   search(key:any){
-    console.log('KEY', key);
-
     this.genericSearchEmit.emit(key);
   }
 
 
   onDetailToggle(event: any) {
-
     console.log('Detail Toggled', event);
   }
 

@@ -31,11 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   datatableInfo() {
-    let page = {
-      number:0,
-      format:true,
-    }
-    this.mainService.test(page).subscribe({
+    this.mainService.test().subscribe({
       next: (response) => {
         this.list = this.formatList(response.content);
         this.totalCount = response.totalElements;
@@ -59,8 +55,6 @@ export class HomeComponent implements OnInit {
   changePage(page:number){
     this.mainService.test(page).subscribe({
       next: (response) => {
-      console.log('llega',page);
-
         this.list = this.formatList(response.content);
         this.elementsVisibles  = response.numberOfElements;
         this.numberPage = response.number;
@@ -72,12 +66,21 @@ export class HomeComponent implements OnInit {
   }
 
   genericSearch(key:string){
-    this.mainService.genericSearch(key).subscribe({
-      next: (response) => {
-        this.list = this.formatList(response.content);
-        },
-        error: error => {
-        }
-    })
+    if(key){
+      this.mainService.genericSearch(key).subscribe({
+        next: (response) => {
+          this.list = this.formatList(response.content);
+          this.totalCount = response.totalElements;
+          this.totalPages = response.totalPages;
+          this.elementsVisibles  = response.numberOfElements
+          this.numberPage = response.number;
+          },
+          error: error => {
+          }
+      })
+    }else{
+      this.datatableInfo();
+    }
+    
   }
 }
