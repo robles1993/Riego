@@ -136,21 +136,46 @@ export class DatatableComponent implements OnInit {
     }
   }
 
+  checkLastPage(page:any){
+    console.log(page);
+    console.log(this.showPageLast);
+    if(page === this.showPageLast){
+      return true;
+    }
+    return false;
+  }
+
+  checkFirstPage(page:any){
+    console.log(page);
+    console.log(this.showPageInitial);
+    if(page === this.showPageInitial){
+      return true;
+    }
+    return false;
+  }
+
   nextPage() {
     if(this._numberPage < this.arrayTotalPages.length){
       this.clearActivePage();
-      this.changeBlockPages(this._numberPage + 1);
+      if( this.checkLastPage(this._numberPage + 1)){
+        this.showPageInitial = this._numberPage;
+        this.showPageLast =this.showPageInitial + 6; 
+        this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+      }
       this.changePageEmit.emit(this._numberPage);
       this.arrayTotalPages[this._numberPage].active =true;
     }
-   
   }
 
   backPage() {
     let backPage = this._numberPage -1 ;
     if(backPage > 0){
       this.clearActivePage();
-      this.changeBlockPages(this._numberPage);
+      if( this.checkFirstPage(backPage)){
+        this.showPageInitial =  backPage>=5?backPage - 5:0;
+        this.showPageLast =backPage>=5? backPage + 1: 6; 
+        this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+      }
       this.changePageEmit.emit(backPage-1);
       this.arrayTotalPages[backPage - 1].active =true;
     }
