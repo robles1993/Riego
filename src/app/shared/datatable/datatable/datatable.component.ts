@@ -35,7 +35,7 @@ export class DatatableComponent implements OnInit {
   @Output() genericSearchEmit: EventEmitter<any> = new EventEmitter();
   arrayTotalPages: any = [];
   arrayParcialPages: any = [];
-
+  customPage:number = 1;
   ColumnMode = ColumnMode
   timeout: any;
   _elementsVisibles: number = 0;
@@ -85,6 +85,15 @@ export class DatatableComponent implements OnInit {
     });
   }
 
+  customChangePage(){
+    this.clearActivePage();
+    this.changePageEmit.emit(this.customPage - 1);
+    this.showPageInitial = this.customPage -1;
+    this.showPageLast =this.customPage + 6; 
+    this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+    this.arrayTotalPages[this.customPage - 1].active =true;
+  }
+
 
 
   setRangeShowArray(initial:any, last:number){
@@ -112,8 +121,6 @@ export class DatatableComponent implements OnInit {
   }
 
   checkLastPage(page:any){
-    console.log(page);
-    console.log(this.showPageLast);
     if(page === this.showPageLast){
       return true;
     }
@@ -121,8 +128,6 @@ export class DatatableComponent implements OnInit {
   }
 
   checkFirstPage(page:any){
-    console.log(page);
-    console.log(this.showPageInitial);
     if(page === this.showPageInitial){
       return true;
     }

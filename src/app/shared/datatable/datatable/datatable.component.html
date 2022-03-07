@@ -83,6 +83,7 @@
       </ng-container> <span *ngIf="this._numberPage  != arrayTotalPages.length ">...</span>
       <i style="padding-right:10px; padding-left:10px; " class="fas fa-angle-right" (click)="nextPage()"></i>
       <i class="fas fa-chevron-circle-right"  (click)="lastPage()"></i>
+      <input type="number" style="width:6%;margin-left:1%" (change)="this.customChangePage()" [(ngModel)]="customPage">
     </div>
   </div>
 
