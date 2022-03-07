@@ -94,22 +94,45 @@ export class DatatableComponent implements OnInit {
     this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
   }
 
-  changeBlockPages(changePage:number ){
-    // debugger;
+  checkChangePage(changePage:number ){
     let lastElement = this.arrayParcialPages[this.arrayParcialPages.length - 1];
     let firstElement = this.arrayParcialPages[0];
     if(changePage === lastElement.page && changePage != this.arrayTotalPages[this.arrayTotalPages.length - 1].page){
       this.setRangeShowArray({condition:"sum", value:5 },6);
     }
     if(changePage === firstElement.page && changePage != this.arrayTotalPages[0].page  ){
-      this.setRangeShowArray({condition:"subtraction", value:5 },6);
+      if(changePage>=5){
+        this.setRangeShowArray({condition:"subtraction", value:5 },6);
+      }else{
+        this.showPageInitial = 0;
+        this.showPageLast =6; 
+        this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+      }
     }
+  }
+
+  checkLastPage(page:any){
+    console.log(page);
+    console.log(this.showPageLast);
+    if(page === this.showPageLast){
+      return true;
+    }
+    return false;
+  }
+
+  checkFirstPage(page:any){
+    console.log(page);
+    console.log(this.showPageInitial);
+    if(page === this.showPageInitial){
+      return true;
+    }
+    return false;
   }
 
   changePage(changePage: number) {
     if(changePage != this._numberPage){
       this.clearActivePage();
-      this.changeBlockPages(changePage);
+      this.checkChangePage(changePage);
       this.changePageEmit.emit(changePage - 1);
       this.activePageForChangePage(changePage);
     }
@@ -136,23 +159,7 @@ export class DatatableComponent implements OnInit {
     }
   }
 
-  checkLastPage(page:any){
-    console.log(page);
-    console.log(this.showPageLast);
-    if(page === this.showPageLast){
-      return true;
-    }
-    return false;
-  }
 
-  checkFirstPage(page:any){
-    console.log(page);
-    console.log(this.showPageInitial);
-    if(page === this.showPageInitial){
-      return true;
-    }
-    return false;
-  }
 
   nextPage() {
     if(this._numberPage < this.arrayTotalPages.length){
