@@ -8,8 +8,21 @@
       <app-button-generic [nameButton]="nameButtonNewData" style="width:20%;margin-left:1rem;"></app-button-generic>
     </div>
   </div><br>
-  <ngx-datatable #myTable id="datatable" class="material expandable" [limit]="5" [columns]="columns" [headerHeight]="50"
-    [rowHeight]="50" [rows]="rows" (page)="onPage($event)" [scrollbarV]="true">
+  <ngx-datatable #myTable 
+      id="datatable" 
+      class="material expandable" 
+      [limit]="12" 
+      [columns]="columns" 
+      [headerHeight]="50"
+      [count]="totalCount"
+      [offset]="this._numberPage-1"
+      [footerHeight]="50"
+      [rowHeight]="50" 
+      [rows]="rows"  
+      [scrollbarV]="true "
+      >
+      <!-- (page)="onPage($event)" -->
+
     <!-- Row Detail Template -->
     <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
 
@@ -68,7 +81,7 @@
     <div  style="width:20%;text-align:left">
       <ng-container>
         <span>
-          <i class="fas fa-eye"></i> {{_elementsVisibles}} de   {{totalCount}} registros
+          Total:{{totalCount}} 
         </span>
       </ng-container>
     </div>

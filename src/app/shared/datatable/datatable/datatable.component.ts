@@ -58,11 +58,18 @@ export class DatatableComponent implements OnInit {
     console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
   }
-
+  cache:any={};
   onPage(event: any) {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       console.log('paged!', event);
+      console.log('this._numberPage!', this._numberPage);
+      debugger;
+      // if (this.cache[event.offset]) return;
+        this.changePageEmit.emit(this._numberPage);
+        this.cache[this._numberPage ] = true;
+        this.clearActivePage();
+        this.arrayTotalPages[this._numberPage].active =true;
     }, 100);
   }
 
