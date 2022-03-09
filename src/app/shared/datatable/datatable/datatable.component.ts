@@ -10,7 +10,19 @@ import { DatatableService } from 'src/app/services/datatable.service';
 
 export class DatatableComponent implements OnInit {
   @ViewChild('myTable') table: any;
-  @Input() rows: [] = [];
+  @Input() set  rows (val:any){
+    console.log('this._rows',this._rows);
+    console.log('val',val);
+    let noRepeet:boolean = true;
+    val.forEach((element:any) => {
+    this._rows.forEach((row:any) => { //meter map
+        if(row.id === element.id){
+          noRepeet = false;
+        }
+      });
+      if(noRepeet)this._rows.push(element);
+    });
+  };
   @Input() columns: any = [];
   @Input() totalCount: number = 0;
   @Input() nameButtonNewData:String = ""
@@ -34,6 +46,8 @@ export class DatatableComponent implements OnInit {
   @Output() changePageEmit: EventEmitter<any> = new EventEmitter();
   @Output() genericSearchEmit: EventEmitter<any> = new EventEmitter();
   arrayTotalPages: any = [];
+  _rows: any = [];
+
   arrayParcialPages: any = [];
   customPage:number = 1;
   ColumnMode = ColumnMode
@@ -64,12 +78,12 @@ export class DatatableComponent implements OnInit {
     this.timeout = setTimeout(() => {
       console.log('paged!', event);
       console.log('this._numberPage!', this._numberPage);
-      debugger;
+      // debugger;
       // if (this.cache[event.offset]) return;
-        this.changePageEmit.emit(this._numberPage);
-        this.cache[this._numberPage ] = true;
+        this.changePageEmit.emit(event.offset);
+        this.cache[event.offset ] = true;
         this.clearActivePage();
-        this.arrayTotalPages[this._numberPage].active =true;
+        this.arrayTotalPages[event.offset].active =true;
     }, 100);
   }
 

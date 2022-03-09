@@ -11,18 +11,18 @@
   <ngx-datatable #myTable 
       id="datatable" 
       class="material expandable" 
-      [limit]="12" 
       [columns]="columns" 
       [headerHeight]="50"
       [count]="totalCount"
       [offset]="this._numberPage-1"
       [footerHeight]="50"
       [rowHeight]="50" 
-      [rows]="rows"  
+      [rows]="_rows"  
       [scrollbarV]="true "
+      [externalPaging]="true"
+        [externalSorting]="true"
+      (page)="onPage($event)"
       >
-      <!-- (page)="onPage($event)" -->
-
     <!-- Row Detail Template -->
     <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
 
