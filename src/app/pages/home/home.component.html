@@ -1,13 +1,28 @@
-<!-- <button (click)="datatableInfo()">product test</button><br><br> -->
-<!-- {{list | json}} -->
 <app-datatable 
-[rows]=" list"
+[rows]=" emitObj"
 [columns]="columns" 
 [totalCount]="totalCount" 
-[totalPages]="totalPages" 
-[elementsVisibles]="elementsVisibles"
 [numberPage]="numberPage"
+[footer]="'footer-1'"
+[actions]="actions"
+(editEmit)="listenEmit($event)"
+[selectionType]="SelectionType.checkbox" 
 [nameButtonNewData]="'Nuevo producto'"
 (changePageEmit)="changePage($event)"
 (genericSearchEmit)="genericSearch($event)">
 </app-datatable>
+
+
+<mat-sidenav-container *ngIf="openEdit"   id="sidenav-user" class="sidenav-container" mode="side">
+    <div>
+        <h1 class="px3">edit</h1>
+    </div>
+    {{idRow | json}}
+    <app-buttons-sidebar (closeSide)="openEdit=false"></app-buttons-sidebar>
+</mat-sidenav-container>
+
+
+<!-- Options Inputs 
+    -selectionType: SelectionType.checkbox, SelectionType.multiclick
+    -footer: footer-1, footer-2
+-->

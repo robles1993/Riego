@@ -1,0 +1,207 @@
+
+  
+  
+  //Back
+  <app-datatable 
+[rows]=" emitObj"
+[columns]="columns" 
+[totalCount]="totalCount" 
+[totalPages]="totalPages" 
+[elementsVisibles]="elementsVisibles"
+[numberPage]="numberPage"
+[nameButtonNewData]="'Nuevo producto'"
+(changePageEmit)="changePage($event)"
+(genericSearchEmit)="genericSearch($event)">
+</app-datatable>
+arrayParcialPages: any = [];
+customPage:number = 1;
+pageChange:number;
+showPageInitial:number = 0;
+showPageLast:number = 4;
+   // @Input() set totalPages(val: number) {
+  //   this.arrayTotalPages = [];
+  //   for (let i = 1; i <= val; i++) {
+  //     if(i===1){
+  //       this.arrayTotalPages.push({active:true, page:i});
+  //     }else{
+  //       this.arrayTotalPages.push({active:false, page:i});
+  //     }
+  //   }
+  //   this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+  // }
+//   arrayParcialPages: any = [];
+//   customPage:number = 1;
+  //setRangeShowArray(initial:any, last:number){
+//     this.showPageInitial = initial.condition==="sum"? this.showPageInitial +  initial.value: 
+//     initial.condition==="subtraction"?this.showPageInitial -  initial.value:initial.value;
+//     this.showPageLast =this.showPageInitial + last; 
+//     this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+//   }
+
+//   checkChangePage(changePage:number ){
+//     let lastElement = (this.arrayParcialPages[this.arrayParcialPages.length - 1]);
+//     let firstElement = this.arrayParcialPages[0];
+//     if(changePage === lastElement.page && changePage != this.arrayTotalPages[this.arrayTotalPages.length - 1].page){
+//       this.setRangeShowArray({condition:"sum", value:4 },5);
+//     }
+//     if(changePage === firstElement.page && changePage != this.arrayTotalPages[0].page  ){
+
+//       if(changePage>=5){
+//         this.setRangeShowArray({condition:"subtraction", value:4 },5);
+//       }else{
+//         this.showPageInitial = 0;
+//         this.showPageLast =4; 
+//         this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+//       }
+//     }
+//   }
+
+//   clearActivePage(){
+//     this.arrayTotalPages.forEach((element:any) => {
+//       element.active = false;
+//     });
+//   }
+
+// activePageForChangePage(changePage:any){
+//     this.arrayTotalPages.forEach((element:any) => {
+//       if(element.page === changePage){
+//           this.arrayTotalPages[changePage - 1].active =true;
+//       }
+//     });
+//   }
+
+//   customChangePage(){
+//     this.clearActivePage();
+//     this.changePageEmit.emit(this.customPage - 1);
+//     this.showPageInitial = this.customPage -1;
+//     this.showPageLast =this.customPage + 6; 
+//     this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+//     this.arrayTotalPages[this.customPage - 1].active =true;
+//   }
+
+
+// <!-- FOOTER -->
+// <!-- <div style="display:flex; position:relative;top:-50px;height:50px;padding:15px;background:#E0DFDF">
+//   <div  style="width:20%;text-align:left">
+//     <ng-container>
+//       <span>
+//         Total:{{totalCount}} 
+//       </span>
+//     </ng-container>
+//   </div>
+
+//   <div style="width:80%;text-align:right">
+//     <i class="fas fa-chevron-circle-left" (click)="firstPage()"></i>
+//     <i  style="padding-left:10px; padding-right:10px; " class="fas fa-angle-left" (click)="backPage()"></i>
+//     <ng-container *ngFor="let page of arrayParcialPages; let i = index">
+//       <span style="cursor:pointer; margin-left:0.8%;font-size:15px" [ngClass]="{'active-page': page.active }"  (click)="changePage(page.page)">
+//          <strong>{{page.page}}</strong> <ng-container *ngIf="this.arrayTotalPages.slice(-1)[0]"> ,</ng-container>
+//       </span>
+//     </ng-container> <span *ngIf="this._numberPage  != arrayTotalPages.length ">...</span>
+//     <i style="padding-right:10px; padding-left:10px; " class="fas fa-angle-right" (click)="nextPage()"></i>
+//     <i class="fas fa-chevron-circle-right"  (click)="lastPage()"></i>
+//     <input type="number" style="width:6%;margin-left:1%" (change)="this.customChangePage()" [(ngModel)]="customPage">
+//   </div>
+// </div> -->
+
+
+
+// @Input() set totalPages(val: number) {
+//     this.arrayTotalPages = [];
+//     for (let i = 1; i <= val; i++) {
+//       if(i===1){
+//         this.arrayTotalPages.push({active:true, page:i});
+//       }else{
+//         this.arrayTotalPages.push({active:false, page:i});
+//       }
+//     }
+//     this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+//   }
+
+//   checkLastPage(page:any){
+//     if(page === this.showPageLast){
+//       return true;
+//     }
+//     return false;
+//   }
+
+//   checkFirstPage(page:any){
+//     if(page === this.showPageInitial){
+//       return true;
+//     }
+//     return false;
+//   }
+
+  
+  // changePage(changePage: number) {
+  //   // debugger;
+  //   // let eventPage:any ={
+  //   //   count: this.totalCount,
+  //   //   limit: undefined,
+  //   //   offset: changePage-1,
+  //   //   pageSize: 12,
+  //   // } 
+  //   // this.onPage(eventPage)
+
+  //   if(changePage != this._numberPage){
+  //     this.clearActivePage();
+  //     this.checkChangePage(changePage);
+  //     // this.changePageEmit.emit(changePage - 1);
+  //     this.emitObj=new sendObj({
+  //       numberPage:changePage - 1,
+  //       method:methodsEnum.ONPAGE,
+  //     });
+  //       this.changePageEmit.emit(this.emitObj);
+  //     this.activePageForChangePage(changePage);
+  //   }
+  // }
+
+  // firstPage() {
+  //   if(this._numberPage -1 > 0){
+  //     this.clearActivePage();
+  //     this.changePageEmit.emit(0);
+  //     this.setRangeShowArray({condition:"nothing", value:0 },6);
+  //     this.arrayTotalPages[0].active =true;
+  //   }
+  // }
+
+  // lastPage() {
+  //   let lastLength =  this.arrayTotalPages.slice(-1)[0].page;
+  //   if(this._numberPage < lastLength - 1){
+  //     this.clearActivePage();
+  //     this.changePageEmit.emit(lastLength -1 );
+  //     this.showPageInitial =this.arrayTotalPages[this.arrayTotalPages.length - 1].page -5 ;
+  //     this.showPageLast =this.arrayTotalPages[this.arrayTotalPages.length - 1].page; 
+  //     this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+  //     this.arrayTotalPages.slice(-1)[0].active =true;
+  //   }
+  // }
+
+
+
+  // nextPage() {
+  //   if(this._numberPage < this.arrayTotalPages.length){
+  //     this.clearActivePage();
+  //     if( this.checkLastPage(this._numberPage + 1)){
+  //       this.showPageInitial = this._numberPage;
+  //       this.showPageLast =this.showPageInitial + 6; 
+  //       this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+  //     }
+  //     this.changePageEmit.emit(this._numberPage);
+  //     this.arrayTotalPages[this._numberPage].active =true;
+  //   }
+  // }
+
+  // backPage() {
+  //   let backPage = this._numberPage -1 ;
+  //   if(backPage > 0){
+  //     this.clearActivePage();
+  //     if( this.checkFirstPage(backPage)){
+  //       this.showPageInitial =  backPage>=5?backPage - 5:0;
+  //       this.showPageLast =backPage>=5? backPage + 1: 6; 
+  //       this.arrayParcialPages = this.arrayTotalPages.slice(this.showPageInitial, this.showPageLast)
+  //     }
+  //     this.changePageEmit.emit(backPage-1);
+  //     this.arrayTotalPages[backPage - 1].active =true;
+  //   }
+  // }

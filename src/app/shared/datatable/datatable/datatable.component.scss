@@ -5,8 +5,33 @@
         z-index: 999 !important;
         overflow: visible !important;
     }
+    .datatable-icon-skip,.datatable-icon-prev{
+        display:none;
+    }
+    .pages{
+        pointer-events: none;
+    }
+
+    .ngx-datatable.scroll-vertical .datatable-body {
+        overflow-y: auto;
+        -webkit-appearance: none;
+    }
+    
+   ::-webkit-scrollbar {
+        width: 12px;               /* width of the entire scrollbar */
+      }
+      
+      ::-webkit-scrollbar-track {
+        /* color of the tracking area */
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: #797979;
+        border-radius: 20px;
+        border: 2px solid #f1f2f3;; 
+      }
 }
 
-.active-page{
+.active-page {
     color:red;
 }
