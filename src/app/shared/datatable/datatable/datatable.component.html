@@ -1,20 +1,27 @@
 <div id="container-datatable">
+  <br>
   <div style=" width:100%;display:flex">
-    <div style="width:50%">
-      <i class="fas fa-filter"></i>
+    
+    <div style="width:30%">
+      <i class="fas fa-filter" style="color:#17a2b8;cursor:pointer;position:relative;left:15px;top:15px"></i>
     </div>
-    <div style="width:50%; display:flex">
-      <app-input-generic style="width:80%" type="text" (emitKey)="search($event)" [label]="'Buscar'" [showLabel]="false"></app-input-generic>
-      <app-button-generic [nameButton]="nameButtonNewData" style="width:20%;margin-left:1rem;"></app-button-generic>
+    <div style="width:100%;text-align:right;">
+      <app-input-generic [width]="'70%'" [id]="'input-generic-search'" style="display:inline-block;width:80%"  [inpuType]="'text'" (emitKey)="search($event)" [label]="'Buscar...'" [showLabel]="false"></app-input-generic>
+      <app-button-generic [nameButton]="nameButtonNewData" [id]="'button-add-new-element'"    style="width:auto;margin-left:1rem;display:inline-block;position:relative;"></app-button-generic>
     </div>
   </div><br>
-  Numberpage = {{this._numberPage-1}}
+  <div style=" width:100%;text-align:right;">
+    <app-button-generic [nameButton]="'PDF'" [icon]="'fas fa-file-pdf'" ></app-button-generic>
+    <app-button-generic [nameButton]="'EXCEL'" [icon]="'fas fa-file-csv'" style="margin-left:1%"></app-button-generic>
+  </div>
+  <br>
+  <!-- Numberpage = {{this._numberPage-1}}
   <ul>
     <li *ngFor="let sel of selected">
       {{ sel.nombre }}
     </li>
     <li *ngIf="!selected?.length">No Selections</li>
-  </ul>
+  </ul> -->
   <ngx-datatable #myTable 
       id="datatable" 
       class="material expandable" 
@@ -86,8 +93,11 @@
     <ng-container *ngFor="let column of columns; let i = index">
       <ngx-datatable-column [name]="column.name" [width]="300">
         <ng-template let-column="column" ngx-datatable-header-template>
-          {{column.name}}
-          <input type="text" class="managetextfilter" placeholder="Buscar" (keyup)="searchColumn()" style="margin-left:1%"/> 
+          <!-- {{column.name}} -->
+          <!-- <input type="text" class="managetextfilter" placeholder="Buscar" (keyup)="searchColumn()" style="margin-left:1%"/> 
+           -->
+          <app-input-generic [width]="'70%'" [id]="'input-search-column'" style="display:inline-block"  [inpuType]="'text'" (emitKey)="search($event)" [label]="column.name" [showLabel]="false"></app-input-generic>
+           
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
          {{ value }} 

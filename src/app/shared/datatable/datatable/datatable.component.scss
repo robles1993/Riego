@@ -16,6 +16,9 @@
         overflow-y: auto;
         -webkit-appearance: none;
     }
+    .datatable-header-cell, datatable-header{
+        background:#BABABA !important;
+    }
     
    ::-webkit-scrollbar {
         width: 12px;               /* width of the entire scrollbar */

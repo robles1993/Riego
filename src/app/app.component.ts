@@ -19,6 +19,7 @@ export class AppComponent implements OnInit  {
   loading$: Observable<boolean> = new Observable();
   messages$: Observable<any> = new Observable();
   sidenavWidth:string = "250px"
+  widthContainerBody:string = "86%"
   _messages:any = {
     type:null,
     value:null,
@@ -48,9 +49,12 @@ export class AppComponent implements OnInit  {
   }
   hiddenSidenav(){
     if(this.sidenavWidth==="0px"){
-      this.sidenavWidth = "250px"
+      this.sidenavWidth = "250px";
+      this.widthContainerBody = "86%";
+
     }else{
       this.sidenavWidth = "0px"
+      this.widthContainerBody = "99%";
     }
   }
 }

@@ -7,7 +7,7 @@
 [actions]="actions"
 (editEmit)="listenEmit($event)"
 [selectionType]="SelectionType.checkbox" 
-[nameButtonNewData]="'Nuevo producto'"
+[nameButtonNewData]="'Producto nuevo'"
 (changePageEmit)="changePage($event)"
 (genericSearchEmit)="genericSearch($event)">
 </app-datatable>
@@ -23,6 +23,6 @@
 
 
 <!-- Options Inputs 
-    -selectionType: SelectionType.checkbox, SelectionType.multiclick
+    -selectionType: SelectionType.checkbox, SelectionType.multiclick or false
     -footer: footer-1, footer-2
 -->

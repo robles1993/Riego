@@ -1,6 +1,7 @@
 <div id="sidenav">
-    <select>
-        <option>Seleccionar dispositivo</option>
+    <br>
+    <select style="width:100%">
+        <option>Seleccionar empresa</option>
     </select>
     <div class="container-links" *ngFor="let link of listSidenav">
         <ng-container *ngIf="isAdmin && link.roles.includes('admin') || !isAdmin && link.roles.includes('user') ">

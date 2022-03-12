@@ -11,7 +11,7 @@
     id="container-sidenav">
       <app-sidenav ></app-sidenav>
     </div>
-    <div id="container-bodys">
+    <div id="container-bodys" [ngStyle]="{width: widthContainerBody}" >
       <router-outlet></router-outlet>
     </div>
   </div>

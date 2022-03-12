@@ -10,6 +10,7 @@ export class InputComponent implements OnInit {
   @Input() inputModel:any = null;
   @Input() showLabel:boolean = true;
   @Input() label:any = null;
+  @Input() width:any = '100%';
   @Input() id:any = null;
   @Output() emitKey: EventEmitter<any> = new EventEmitter();
 

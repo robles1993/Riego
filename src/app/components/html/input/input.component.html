@@ -1,5 +1,5 @@
 
     <div class="form-group mb-3">
         <label *ngIf="showLabel" for="exampleInputEmail1">{{label}}</label>
-        <input class="form-control" (keyup)="keyUp($event)" [placeholder]="label" [(id)]="id"  [(type)]="inpuType" [(ngModel)]="inputModel" >
+        <input  [ngStyle]="{width: width}" (keyup)="keyUp($event)" [placeholder]="label" [(id)]="id"  [(type)]="inpuType" [(ngModel)]="inputModel" >
     </div>
