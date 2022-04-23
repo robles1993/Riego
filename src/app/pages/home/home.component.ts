@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
         // this.list = this.formatList(response.content);
         this.elementsVisibles  = response.numberOfElements;
         this.numberPage = response.number;
-        this.columns = [{ name: 'Nombre', height: 300 }, { name: 'Precio', height: 300 }];
+        this.columns = [{ name: 'Nombre', height: 300 }, { name: 'Precio', height: 300 }, { name: 'Coordenadas', height: 300 },{ name: 'Familia', height: 300 } , { name: 'Tipo', height: 300 }];
       },
       error: error => {
       }

@@ -12,6 +12,9 @@ export class InputComponent implements OnInit {
   @Input() label:any = null;
   @Input() width:any = '100%';
   @Input() id:any = null;
+  @Input() colorIconSearch:any = 'null';
+
+  
   @Output() emitKey: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

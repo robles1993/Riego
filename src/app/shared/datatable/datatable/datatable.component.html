@@ -1,13 +1,22 @@
 <div id="container-datatable">
   <br>
   <div style=" width:100%;display:flex">
-    
-    <div style="width:30%">
-      <i class="fas fa-filter" style="color:#17a2b8;cursor:pointer;position:relative;left:15px;top:15px"></i>
+    <div style="width:70%;">
+      <i class="fas fa-filter" style="color:#17a2b8;cursor:pointer;display:inline-block"></i>
+
+      <div *ngFor="let facet of activeFacets" style="margin-left:1%;color:#767676; background:#CBCBCB;width:auto;padding:5px;position:relative;padding-right:20px;border-radius:10px;display:inline-block" >
+        {{facet.key}}: {{facet.value}}
+        <span style="position:absolute;top:4.5px;right:6px;cursor:pointer">x</span>
+      </div>
+
+     
     </div>
     <div style="width:100%;text-align:right;">
-      <app-input-generic [width]="'70%'" [id]="'input-generic-search'" style="display:inline-block;width:80%"  [inpuType]="'text'" (emitKey)="search($event)" [label]="'Buscar...'" [showLabel]="false"></app-input-generic>
-      <app-button-generic [nameButton]="nameButtonNewData" [id]="'button-add-new-element'"    style="width:auto;margin-left:1rem;display:inline-block;position:relative;"></app-button-generic>
+      <div style="border:1px solid #DCDCDC;
+        display:inline-block;width:80%;height:31px;">
+      <app-input-generic [width]="'98%'" [id]="'input-generic-search'" [colorIconSearch]="'#17a2b8'"  [inpuType]="'text'" (emitKey)="search($event)" [label]="'Buscar...'" [showLabel]="false"></app-input-generic>
+      </div>
+      <app-button-generic [nameButton]="nameButtonNewData" [id]="'button-add-new-element'"    style="width:auto;margin-left:1rem;display:inline-block;"></app-button-generic>
     </div>
   </div><br>
   <div style=" width:100%;text-align:right;">
@@ -43,10 +52,8 @@
       (page)="onPage($event)"
       (activate)="editByClicking($event)"
       (select)="onSelect($event)"
-
       >
       <!-- [displayCheck]="displayCheck" -->
-      
       
     <!-- CheckBox Selected -->
     <ngx-datatable-column
@@ -62,7 +69,6 @@
     </ngx-datatable-column>
 
     <!-- Expand -->
-
     <ngx-datatable-row-detail  [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
       <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
         <div style="padding-left:35px; display:flex; margin-top:1%;" *ngFor="let expand of row.expand">
@@ -75,33 +81,20 @@
     <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="true"
       [canAutoResize]="false">
       <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-
         <a *ngIf="row.expand" href="javascript:void(0)" [class.datatable-icon-right]="!expanded"
           [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
         </a>
       </ng-template>
     </ngx-datatable-column>
 
-    <!-- 
-    <ngx-datatable-column name="Index" [width]="200">
-      <ng-template  let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-        <strong>{{ rowIndex }}</strong>
-      </ng-template>
-    </ngx-datatable-column> -->
-
-
+    <!-- Rows -->
     <ng-container *ngFor="let column of columns; let i = index">
-      <ngx-datatable-column [name]="column.name" [width]="300">
+      <ngx-datatable-column [name]="column.name" [ngStyle]="{width:'10px'}">
         <ng-template let-column="column" ngx-datatable-header-template>
-          <!-- {{column.name}} -->
-          <!-- <input type="text" class="managetextfilter" placeholder="Buscar" (keyup)="searchColumn()" style="margin-left:1%"/> 
-           -->
-          <app-input-generic [width]="'70%'" [id]="'input-search-column'" style="display:inline-block"  [inpuType]="'text'" (emitKey)="search($event)" [label]="column.name" [showLabel]="false"></app-input-generic>
-           
+          <app-input-generic [width]="'70%'" [id]="'input-search-column'" (emitKey)="searchColumn(column.name, $event)" style="display:inline-block"  [inpuType]="'text'"  [label]="column.name" [showLabel]="false"></app-input-generic>
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-         {{ value }} 
-
+          {{ value }} 
         </ng-template>
       </ngx-datatable-column>
     </ng-container>
@@ -115,12 +108,8 @@
         </i>
       </ng-template>
     </ngx-datatable-column>
-
-
-
     
     <!-- Footer Informative -->
-    
     <ngx-datatable-footer *ngIf="footer==='footer-2'">
       <ng-template
         ngx-datatable-footer-template
@@ -137,8 +126,5 @@
         </div>
       </ng-template>
     </ngx-datatable-footer>
-
   </ngx-datatable>
-
-
 </div>
